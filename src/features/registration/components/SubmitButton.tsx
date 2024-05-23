@@ -57,6 +57,8 @@ interface SubmitButtonProp {
   isPradabchorEventSelected : boolean;
   isFirstMeetEventSelected : boolean;
   isFriendshipEventSelected : boolean;
+
+  isDisableStudentCode: boolean;
 }
 
 const SubmitButton = ({
@@ -79,7 +81,8 @@ const SubmitButton = ({
   isStaffButtonSelected,
   isFirstMeetEventSelected,
   isFriendshipEventSelected,
-  isPradabchorEventSelected
+  isPradabchorEventSelected,
+  isDisableStudentCode
 }: SubmitButtonProp) => {
   const parametersHandleStudentsCollection = {
     std_code,
@@ -99,6 +102,7 @@ const SubmitButton = ({
     isFreshmenButtonSelected,
     isCurrentStudentButtonSelected,
     isStaffButtonSelected,
+    isDisableStudentCode
   };
 
 
@@ -147,7 +151,7 @@ const SubmitButton = ({
   };
 
   function validateFormCompletion() {
-    if(isFreshmenButtonSelected){
+    if(isFreshmenButtonSelected && !isDisableStudentCode){
       if (
         !std_code ||
         !std_first_name_th ||
@@ -166,7 +170,21 @@ const SubmitButton = ({
         // If any required field is empty, return false
         return false;
       }
-    } else if(isCurrentStudentButtonSelected){
+    } else if(isDisableStudentCode){
+      if (
+        !std_first_name_th ||
+        !std_last_name_th ||
+        !std_faculty_name ||
+        !std_religion ||
+        !std_telephone ||
+        !std_nickname ||
+        !std_facebook ||
+        !std_instagram) {
+          return false;
+        }
+      
+    } 
+    else if(isCurrentStudentButtonSelected){
         if(
           !std_code ||
           !std_first_name_th ||
@@ -180,10 +198,6 @@ const SubmitButton = ({
       return true;
     }
 
-
-  
-  
-
   return (
     <Button
       variant="contained"
@@ -191,7 +205,7 @@ const SubmitButton = ({
         fontFamily: "Athiti",
       }}
       onClick={async (e) => {
-        if (formValidation() && ! await handleRegisteredStudentCode(std_code) && std_religion == "อิสลาม") {
+        if (validateFormCompletion() && ! await handleRegisteredStudentCode(std_code) && std_religion == "อิสลาม") {
           const uuid_student = handleStudentsCollection(
             parametersHandleStudentsCollection
           );
@@ -204,12 +218,12 @@ const SubmitButton = ({
 
           console.log("Already submit Islam group.");
         }
-        else if(formValidation() && ! await handleRegisteredStudentCode(std_code) ){
+        else if(validateFormCompletion() && ! await handleRegisteredStudentCode(std_code) ){
           const uuid_student = handleStudentsCollection(
           parametersHandleStudentsCollection
         );
-        // handleClubsCollection();
-        // handleEventsCollection();
+        //handleClubsCollection();
+        //handleEventsCollection();
         handleEventsRegistrationCollection(await uuid_student, [
           isPradabchorEventSelected,
           isFirstMeetEventSelected,
@@ -219,7 +233,8 @@ const SubmitButton = ({
         console.log("Already submit.");}
         
       }}
-      disabled={!validateFormCompletion() && (!isFreshmenButtonSelected || !isCurrentStudentButtonSelected)}
+      disabled={true && (!validateFormCompletion() || (!isCurrentStudentButtonSelected && !isFreshmenButtonSelected))}
+      //disabled={!validateFormCompletion() && (!isFreshmenButtonSelected || !isCurrentStudentButtonSelected)}
     >
       ลงทะเบียน
     </Button>

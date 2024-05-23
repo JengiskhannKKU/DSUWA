@@ -14,6 +14,9 @@ const Page = () => {
   const [isStaffButtonSelected, setIsStaffButtonSelected] =
     useState<boolean>(false);
 
+  const [isDisableStudentCode, setIsDisableStudentCode] =
+    useState<boolean>(false);
+
   const [validationMessage, setValidationMessage] = useState<string>("");
 
   const [std_code, setSTD_code] = useState<string>("");
@@ -46,7 +49,7 @@ const Page = () => {
     useState<boolean>(false);
 
   // Get `uuid_student`
-  const [uuid_student, setUUID_student] = useState<string>("");
+  //const [uuid_student, setUUID_student] = useState<string>("");
 
   // Generate registration `code`
   // const firstmeet_2024_code = uuidv4().split("-")[0];
@@ -164,6 +167,8 @@ const Page = () => {
             setSTD_facebook={setSTD_facebook}
             std_instagram={std_instagram}
             setSTD_instagram={setSTD_instagram}
+            isDisableStudentCode={isDisableStudentCode}
+            setIsDisableStudentCode={setIsDisableStudentCode}
           />
         )}
 
@@ -202,6 +207,7 @@ const Page = () => {
           isFirstMeetEventSelected={isFirstMeetEventSelected}
           isFriendshipEventSelected={isFriendshipEventSelected}
           isPradabchorEventSelected={isPradabchorEventSelected}
+          isDisableStudentCode={isDisableStudentCode}
         />
 
         <button

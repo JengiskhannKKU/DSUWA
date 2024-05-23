@@ -145,6 +145,9 @@ interface FreshmenProps {
 
   std_instagram: string;
   setSTD_instagram: React.Dispatch<React.SetStateAction<string>>;
+
+  isDisableStudentCode: boolean;
+  setIsDisableStudentCode :React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Freshmen = ({
@@ -162,6 +165,7 @@ const Freshmen = ({
   std_friend_telephone,
   std_facebook,
   std_instagram,
+  isDisableStudentCode,
   setSTD_code,
   setSTD_first_name_th,
   setSTD_last_name_th,
@@ -176,10 +180,11 @@ const Freshmen = ({
   setSTD_friend_telephone,
   setSTD_facebook,
   setSTD_instagram,
+  setIsDisableStudentCode
 }: FreshmenProps) => {
   const [facultyCode, setFacultyCode] = useState("");
-  const [isDisableStudentCode, setIsDisableStudentCode] =
-    useState<boolean>(false);
+  // const [isDisableStudentCode, setIsDisableStudentCode] =
+  //   useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [stdCodeError, setStdCodeError] = useState<string | null>(null);
   const [nameError, setNameError] = useState<string | null>(null);
