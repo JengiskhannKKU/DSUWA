@@ -26,8 +26,8 @@ export default function TypeFoodCheckBoxes({std_food_type, setSTD_food_type}:Typ
       <FormLabel sx={{ mt: 1, fontFamily: "Athiti", fontSize: '18px', fontWeight: 'medium' }}>
         ประเภทอาหารที่รับประทาน
       </FormLabel>
-      <RadioGroup
-        sx={{ justifyContent: 'space-between', flexWrap: 'wrap'}}
+      <RadioGroup row
+        sx={{ justifyContent: 'space-around', flexWrap: 'wrap'}}
         value={std_food_type}
         onChange={handleRadioChange}
       >
@@ -42,18 +42,6 @@ export default function TypeFoodCheckBoxes({std_food_type, setSTD_food_type}:Typ
           value="อาหารฮาลาล" 
           control={<Radio />} 
           label="อาหารฮาลาล" 
-        />
-        <FormControlLabel 
-          sx={{ mt: "-4px", '& .MuiFormControlLabel-label': { fontFamily: "Athiti" } }} 
-          value="อาหารเจ" 
-          control={<Radio />} 
-          label="อาหารเจ" 
-        />
-        <FormControlLabel 
-          sx={{ mt: "-4px", '& .MuiFormControlLabel-label': { fontFamily: "Athiti" } }} 
-          value="อาหารมังสวิรัติ" 
-          control={<Radio />} 
-          label="อาหารมังสวิรัติ" 
         />
       </RadioGroup>
     </FormControl>
