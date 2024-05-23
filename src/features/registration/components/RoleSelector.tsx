@@ -35,11 +35,11 @@ const RolesSelector = ({
         setIsCurrentStudentButtonSelected(true);
         setIsStaffButtonSelected(false);
         break;
-      case "staff":
-        setIsFreshmenButtonSelected(false);
-        setIsCurrentStudentButtonSelected(false);
-        setIsStaffButtonSelected(true);
-        break;
+      // case "staff":
+      //   setIsFreshmenButtonSelected(false);
+      //   setIsCurrentStudentButtonSelected(false);
+      //   setIsStaffButtonSelected(true);
+      //   break;
       default:
         break;
     }

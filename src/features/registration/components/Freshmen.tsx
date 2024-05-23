@@ -244,26 +244,6 @@ const Freshmen = ({
       }}
     >
       <Stack spacing={1}>
-        {/* <TextField
-          label="รหัสนักศึกษา"
-          size="small"
-          value={std_code}
-          onChange={(e) => {
-            setSTD_code(e.target.value)
-          }}
-        />
-
-        <TextField
-          label="ชื่อนามสกุล"
-          size="small"
-          onChange={(e) => {
-            setSTD_first_name_th(e.target.value.split(" ")[0]);
-            setSTD_last_name_th(e.target.value.split(" ")[1]);
-            console.log("th: " + std_first_name_th, std_last_name_th);
-          }}
-          fullWidth
-        /> */}
-
         <Typography
           sx={{
             fontFamily: "Athiti",
@@ -331,7 +311,6 @@ const Freshmen = ({
           fullWidth
           error={!!nameError}
           helperText={nameError}
-          disabled={std_code ? false : true}
         />
 
         <TextField
@@ -378,15 +357,6 @@ const Freshmen = ({
             <MenuItem value="อิสลาม">อิสลาม</MenuItem>
           </Select>
         </FormControl>
-
-        {/* <TextField
-          label="อาหารที่รับประทาน"
-          size="small"
-          value={std_food_type}
-          onChange={(e) => {
-            setSTD_food_type(e.target.value);
-          }}
-        /> */}
 
         <TypeFoodCheckBoxes
           std_food_type={std_food_type}

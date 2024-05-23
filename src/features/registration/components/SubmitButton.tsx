@@ -1,5 +1,5 @@
 import { Button, Container } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import handleClubsCollection from "../utils/handleClubsCollection";
 import handleEventsCollection from "../utils/handleEventsCollection";
 import handleStudentsCollection from "../utils/handleStudentsCollection";
@@ -101,23 +101,24 @@ const SubmitButton = ({
     isStaffButtonSelected,
   };
 
+
   const formValidation = () => {
 
     if(isFreshmenButtonSelected) {
       if(
-        std_code == "" &&
-        std_first_name_th == "" &&
-        std_last_name_th == "" &&
-        std_nickname == "" &&
-        std_faculty_name == "" &&
-        std_religion == "" &&
-        std_food_type == "" &&
-        // std_food_allergy == "" &&
-        // std_drug_allergy == "" &&
-        // std_underlying_disease == "" &&
-        std_telephone == "" &&
-        std_friend_telephone == "" &&
-        std_facebook == "" &&
+        std_code == "" ||
+        std_first_name_th == "" ||
+        std_last_name_th == "" ||
+        std_nickname == "" ||
+        std_faculty_name == "" ||
+        std_religion == "" ||
+        // std_food_type == "" ||
+        // std_food_allergy == "" ||
+        // std_drug_allergy == "" ||
+        // std_underlying_disease == "" ||
+        std_telephone == "" ||
+        //std_friend_telephone == "" ||
+        std_facebook == "" ||
         std_instagram == ""
       ) {
         console.log("Info must be filled out")
@@ -125,8 +126,8 @@ const SubmitButton = ({
       } 
     } else if(isCurrentStudentButtonSelected) {
         if(
-          std_code == "" &&
-          std_first_name_th == "" &&
+          std_code == "" ||
+          std_first_name_th == "" ||
           std_last_name_th == "" 
         ) {
             console.log("Info must be filled out")
@@ -134,17 +135,54 @@ const SubmitButton = ({
         } 
     } else if(isStaffButtonSelected) {
         if(
-        std_first_name_th == "" &&
+        std_first_name_th == "" ||
         std_last_name_th == "" 
       ) {
         console.log("Info must be filled out")
         return false;
       } 
     }
-  
+    console.log("okokokok")
     return true;
   };
 
+  function validateFormCompletion() {
+    if(isFreshmenButtonSelected){
+      if (
+        !std_code ||
+        !std_first_name_th ||
+        !std_last_name_th ||
+        !std_faculty_name ||
+        !std_religion ||
+        !std_telephone ||
+        !std_nickname ||
+        !std_facebook ||
+        !std_instagram
+        // !std_food_type.length > 0 ||
+        // !std_food_allergy.length > 0 ||
+        // !std_drug_allergy.length > 0 ||
+        // !std_underlying_disease.length > 0
+      ) {
+        // If any required field is empty, return false
+        return false;
+      }
+    } else if(isCurrentStudentButtonSelected){
+        if(
+          !std_code ||
+          !std_first_name_th ||
+          !std_last_name_th
+        ) {
+          return false;
+        }
+    }
+
+      // If all required fields are filled but no optional fields are filled, return true
+      return true;
+    }
+
+
+  
+  
 
   return (
     <Button
@@ -164,7 +202,7 @@ const SubmitButton = ({
             isFriendshipEventSelected,
           ], isFriendshipEventSelected)
 
-          console.log("Already summit Islam group.");
+          console.log("Already submit Islam group.");
         }
         else if(formValidation() && ! await handleRegisteredStudentCode(std_code) ){
           const uuid_student = handleStudentsCollection(
@@ -181,7 +219,7 @@ const SubmitButton = ({
         console.log("Already submit.");}
         
       }}
-      disabled={!formValidation()}
+      disabled={!validateFormCompletion() && (!isFreshmenButtonSelected || !isCurrentStudentButtonSelected)}
     >
       ลงทะเบียน
     </Button>
